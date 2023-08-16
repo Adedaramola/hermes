@@ -8,7 +8,7 @@ use App\Models\Concerns\BelongsToStore;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Role extends EloquentModel
+final class Role extends EloquentModel
 {
     use BelongsToStore;
 

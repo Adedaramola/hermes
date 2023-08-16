@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AuthenticateSessionTest extends TestCase
+final class AuthenticateSessionTest extends TestCase
 {
     /**
      * A basic feature test example.

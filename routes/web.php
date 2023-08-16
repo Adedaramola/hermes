@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('guest')->group(function(): void {
-    Route::controller(AuthenticateSessionController::class)->group(function(): void {
+Route::middleware('guest')->group(function (): void {
+    Route::controller(AuthenticateSessionController::class)->group(function (): void {
         Route::get('/login', 'index')->name('login');
     });
 });
 
-Route::middleware('auth')->group(function(): void {
-    Route::get('/', fn() => response()->noContent());
+Route::middleware('auth')->group(function (): void {
+    Route::get('/', fn () => response()->noContent());
 });

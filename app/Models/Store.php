@@ -6,6 +6,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 
-class Store extends EloquentModel
+final class Store extends EloquentModel
 {
 }

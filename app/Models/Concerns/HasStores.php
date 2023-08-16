@@ -33,7 +33,7 @@ trait HasStores
 
     public function currentStore(): BelongsTo
     {
-        if (is_null($this->current_store_id) && $this->id) {
+        if (null === $this->current_store_id && $this->id) {
             $this->switchStore($this->personalStore());
         }
 
@@ -42,7 +42,7 @@ trait HasStores
 
     public function switchStore(Store $store): bool
     {
-        if (! $this->belongsToStore($store)) {
+        if ( ! $this->belongsToStore($store)) {
             return false;
         }
 
@@ -67,7 +67,7 @@ trait HasStores
 
     public function ownsStore(Store $store): bool
     {
-        if (is_null($store)) {
+        if (null === $store) {
             return false;
         }
 
@@ -76,12 +76,10 @@ trait HasStores
 
     public function belongsToStore(Store $store): bool
     {
-        if (is_null($store)) {
+        if (null === $store) {
             return false;
         }
 
-        return $this->ownsStore($store) || $this->stores->contains(function ($s) use ($store) {
-            return $s->id === $store->id;
-        });
+        return $this->ownsStore($store) || $this->stores->contains(fn ($s) => $s->id === $store->id);
     }
 }

@@ -12,6 +12,6 @@ use Illuminate\Notifications\Notifiable;
 abstract class Model extends EloquentModel
 {
     use HasFactory;
-    use Notifiable;
     use HasUlids;
+    use Notifiable;
 }

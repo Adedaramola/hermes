@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Concerns\HasStores;
@@ -10,13 +12,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+final class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use Notifiable;
     use HasStores;
     use HasUlids;
+    use Notifiable;
     use SoftDeletes;
 
     protected $hidden = [

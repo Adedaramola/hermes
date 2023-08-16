@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Limiters;
 
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class LoginRateLimiter
+final class LoginRateLimiter
 {
     /**
      * Create a new login rate limiter instance.
@@ -43,7 +45,7 @@ class LoginRateLimiter
      *
      * @return void
      */
-    public function increment(Request $request)
+    public function increment(Request $request): void
     {
         $this->limiter->hit($this->throttleKey($request), 60);
     }
@@ -63,7 +65,7 @@ class LoginRateLimiter
      *
      * @return void
      */
-    public function clear(Request $request)
+    public function clear(Request $request): void
     {
         $this->limiter->clear($this->throttleKey($request));
     }
@@ -73,8 +75,8 @@ class LoginRateLimiter
      *
      * @return string
      */
-    protected function throttleKey(Request $request)
+    private function throttleKey(Request $request)
     {
-        return Str::transliterate(Str::lower($request->input('username')).'|'.$request->ip());
+        return Str::transliterate(Str::lower($request->input('username')) . '|' . $request->ip());
     }
 }

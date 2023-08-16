@@ -7,7 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Permission extends EloquentModel
+final class Permission extends EloquentModel
 {
     public function roles(): BelongsToMany
     {

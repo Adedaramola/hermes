@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\User\User;
@@ -7,7 +9,7 @@ use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
 
-class CreateAdminUserCommand extends Command
+final class CreateAdminUserCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -26,7 +28,7 @@ class CreateAdminUserCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $this->info('Create a new user with Administrator privileges');
 

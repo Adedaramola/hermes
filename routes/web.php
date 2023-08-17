@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthenticateSessionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StoreSettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,5 @@ Route::middleware('guest')->group(function (): void {
     });
 });
 
-Route::middleware('auth')->group(function (): void {
-    Route::get('/', fn () => response()->noContent());
-});
+Route::get('/', DashboardController::class)->name('dashboard');
+Route::get('/settings', [StoreSettingsController::class, 'index'])->name('settings');

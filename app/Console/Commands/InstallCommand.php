@@ -18,13 +18,34 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Install Hermes';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        //
+        if ($this->confirm('Would you like to configure Hermes before installation?')) {
+            $this->configureEnvironmentVariables();
+        }
+
+        $this->info('Hermes is installed!');
+    }
+
+    private function configureEnvironmentVariables(): void
+    {
+        $environmentDirc = app()->environmentPath();
+        $environmentFile = app()->environmentFile();
+        $environmentPath = "{$environmentDirc}/{$environmentFile}";
+
+        if (file_exists( $environmentPath )) {
+            $this->line('Environment file already exists');
+            return;
+        }
+
+        copy("$environmentPath.example", $environmentPath);
+        
+        // generate app key
+        $this->call('key:generate');
     }
 }

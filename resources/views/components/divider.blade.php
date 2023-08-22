@@ -1,1 +1,0 @@
-<div class="border border-slate-200"></div>

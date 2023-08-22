@@ -2,27 +2,20 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\Auth\AuthenticateSessionController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\StoreSettingsController;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Pages\Dashboard;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::middleware('guest')->group(function (): void {
-    Route::controller(AuthenticateSessionController::class)->group(function (): void {
-        Route::get('/login', 'index')->name('login');
-    });
+Route::group([
+    'middleware' => RedirectIfAuthenticated::class
+], function ($router) {
+    $router->get('/login', Login::class)->name('login');
 });
 
-Route::get('/', DashboardController::class)->name('dashboard');
-Route::get('/settings', [StoreSettingsController::class, 'index'])->name('settings');
+Route::group([
+    'middleware' => []
+], function ($router) {
+    $router->get('/', Dashboard::class)->name('dashboard');
+});

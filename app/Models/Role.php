@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Concerns\BelongsToStore;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Spatie\Permission\Models\Role as SpatieRole;
 
-final class Role extends EloquentModel
+class Role extends SpatieRole
 {
-    use BelongsToStore;
-
-    public function permissions(): BelongsToMany
-    {
-        return $this->belongsToMany(Permission::class);
-    }
+    use HasUlids;
 }

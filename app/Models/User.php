@@ -17,11 +17,11 @@ final class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
+    use HasRoles;
     use HasStores;
     use HasUlids;
     use Notifiable;
     use SoftDeletes;
-    use HasRoles;
 
     protected $hidden = [
         'password',

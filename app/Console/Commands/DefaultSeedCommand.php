@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\Store;
@@ -29,9 +31,9 @@ class DefaultSeedCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
-        if ( !$this->confirm('Are you sure to proceed with this?') ) {
+        if ( ! $this->confirm('Are you sure to proceed with this?')) {
             return;
         }
 
@@ -48,7 +50,7 @@ class DefaultSeedCommand extends Command
                     'first_name' => 'Admin',
                     'username' => 'admin',
                     'password' => Hash::make('password')
-                ]), function (User $user) {
+                ]), function (User $user): void {
                     $this->seedDefaultStore($user);
                 })
             );
@@ -57,11 +59,11 @@ class DefaultSeedCommand extends Command
         }
     }
 
-    private function seedDefaultStore(User $user)
+    private function seedDefaultStore(User $user): void
     {
         $user->ownedStores()->save(Store::forceCreate([
             'user_id' => $user->id,
-            'name' => explode(' ', $user->first_name, 2)[0]."'s Store",
+            'name' => explode(' ', $user->first_name, 2)[0] . "'s Store",
             'personal_store' => true
         ]));
     }
